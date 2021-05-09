@@ -3,18 +3,18 @@
     <transition name="form-fade" mode="in-out">
       <section class="form-contianer" v-show="showLogin">
         <div class="manage-tip">
-          <p>elm后台管理系统</p>
+          <p>element后台管理系统</p>
         </div>
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
           <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="用户名">
+            <el-input v-model="loginForm.username" placeholder="请输入用户名">
               <span>dsfsf</span>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input
               type="password"
-              placeholder="密码"
+              placeholder="请输入密码密码"
               v-model="loginForm.password"
             ></el-input>
           </el-form-item>
@@ -22,7 +22,7 @@
             <el-button
               type="primary"
               @click="submitForm('loginForm')"
-              class="submit-btn"
+              class="submit-button"
               >登陆</el-button
             >
           </el-form-item>
@@ -47,10 +47,10 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '密码不能为空', trigger: 'blur' }
         ]
       },
       showLogin: false
@@ -89,7 +89,7 @@ export default {
         } else {
           this.$notify.error({
             title: '错误',
-            message: '请输入正确的用户名密码',
+            message: '请输入正确的用户名和密码',
             offset: 100
           })
           return false
@@ -133,7 +133,7 @@ export default {
   border-radius: 5px;
   text-align: center;
   background-color: #fff;
-  .submit-btn {
+  .submit-button {
     width: 100%;
     font-size: 16px;
   }
