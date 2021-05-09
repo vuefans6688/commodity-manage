@@ -23,11 +23,16 @@
             :action="baseUrl + '/admin/update/avatar/' + adminInfo.id"
             :show-file-list="false"
             :on-success="uploadImg"
-            :before-upload="beforeImgUpload">
-            <img v-if="adminInfo.avatar" :src="baseImgPath + adminInfo.avatar" class="avatar">
+            :before-upload="beforeImgUpload"
+          >
+            <img
+              v-if="adminInfo.avatar"
+              :src="baseImgPath + adminInfo.avatar"
+              class="avatar"
+            />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
-        </li>    
+        </li>
       </ul>
     </div>
   </div>
@@ -36,7 +41,7 @@
 <script>
 import headTop from '../components/headTop'
 import { mapState } from 'vuex'
-import { baseUrl, baseImgPath}  from '@/config/env'
+import { baseUrl, baseImgPath } from '@/config/env'
 export default {
   data () {
     return {
@@ -74,53 +79,53 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-	.explain-text {
-		margin-top: 20px;
-		text-align: center;
-		font-size: 20px;
-		color: #333;
-	}
-  .admin-set {
-    width: 60%;
-    background-color: #F9FAFC;
-    min-height: 400px;
-    margin: 20px auto 0;
-    border-radius: 10px;
-    ul > li {
-      padding: 20px;
-      span {
-        color: #666;
-      }
+@import "../style/mixin";
+.explain-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #333;
+}
+.admin-set {
+  width: 60%;
+  background-color: #f9fafc;
+  min-height: 400px;
+  margin: 20px auto 0;
+  border-radius: 10px;
+  ul > li {
+    padding: 20px;
+    span {
+      color: #666;
     }
   }
-  .admin-title {
-    margin-top: 20px;
-    .sc(24px, #666);
-    text-align: center;
-  }
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    margin-top: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    text-align: center;
-  }
-  .avatar {
-    width: 120px;
-    height: 120px;
-    display: block;
-  }
+}
+.admin-title {
+  margin-top: 20px;
+  .sc(24px, #666);
+  text-align: center;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #20a0ff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
 </style>

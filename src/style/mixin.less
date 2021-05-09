@@ -39,32 +39,32 @@
   transform: translateY(-50%);
 }
 
-//定位左右居中
+// 定位左右居中
 .lr {  
 	position: absolute;
 	left: 50%;
   transform: translateX(-50%);
 }
 
-//宽高
+// 宽高
 .wh(@width, @height) {
 	width: @width;
 	height: @height;
 }
 
-//字体大小、行高、字体
+// 字体大小、行高、字体
 .ft(@size, @line-height) {  
 	font-size: @size;
 	line-height:@line-height;
 }
 
-//字体大小，颜色
+// 字体大小，颜色
 .sc(@size, @color) {
 	font-size: @size;
 	color: @color;
 }
 
-//flex 布局和 子元素 对其方式
+// flex 布局和 子元素 对其方式
 .fj(@type: space-between) {
 	display: flex;
 	justify-content: @type;

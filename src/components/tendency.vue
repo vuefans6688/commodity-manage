@@ -1,6 +1,6 @@
 <template>
   <div class="line">
-    <div id="line" style="width: 90%;height: 450px;"></div>
+    <div id="line" style="width: 90%; height: 450px"></div>
   </div>
 </template>
 
@@ -141,9 +141,9 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-  .line {
-    display: flex;
-    justify-content: center;
-  }
+@import "../style/mixin";
+.line {
+  display: flex;
+  justify-content: center;
+}
 </style>

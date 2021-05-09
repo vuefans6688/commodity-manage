@@ -31,7 +31,7 @@ export default {
         } else {
           throw new Error(res)
         }
-      } catch(err) {
+      } catch (err) {
         console.log('获取用户分布信息失败', err)
       }
     }
@@ -40,5 +40,5 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
+@import "../style/mixin";
 </style>

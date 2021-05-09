@@ -1,10 +1,8 @@
 <template>
-  <div class="fillcontain">
+  <div class="fill-contain">
     <head-top></head-top>
     <div class="table-container">
-      <el-table
-        :data="tableData"
-        style="width: 100%">
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -35,31 +33,26 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column
-          label="店铺名称"
-          prop="name">
-        </el-table-column>
-        <el-table-column
-          label="店铺地址"
-          prop="address">
-        </el-table-column>
-        <el-table-column
-          label="店铺介绍"
-          prop="description">
-        </el-table-column>
+        <el-table-column label="店铺名称" prop="name"> </el-table-column>
+        <el-table-column label="店铺地址" prop="address"> </el-table-column>
+        <el-table-column label="店铺介绍" prop="description"> </el-table-column>
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+              >编辑</el-button
+            >
             <el-button
               size="mini"
               type="Success"
-              @click="addFood(scope.$index, scope.row)">添加食品</el-button>
+              @click="addFood(scope.$index, scope.row)"
+              >添加食品</el-button
+            >
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.$index, scope.row)"
+              >删除</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -70,7 +63,8 @@
           :current-page="currentPage"
           :page-size="20"
           layout="total, prev, pager, next"
-          :total="count">
+          :total="count"
+        >
         </el-pagination>
       </div>
       <el-dialog title="修改店铺信息" v-model="dialogFormVisible">
@@ -83,7 +77,7 @@
               v-model="address.address"
               :fetch-suggestions="querySearchAsync"
               placeholder="请输入地址"
-              style="width: 100%;"
+              style="width: 100%"
               @select="addressSelect"
             ></el-autocomplete>
             <span>当前城市： {{ city.name }}</span>
@@ -107,8 +101,13 @@
               :action="baseUrl + '/v1/addimg/shop'"
               :show-file-list="false"
               :on-success="handleServiceAvatarScucess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="selectTable.image_path" :src="baseImgPath + selectTable.image_path" class="avatar">
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                v-if="selectTable.image_path"
+                :src="baseImgPath + selectTable.image_path"
+                class="avatar"
+              />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -227,7 +226,7 @@ export default {
       }
     },
     addFood (index, row) {
-      this.$router.push({ path: 'addGoods', query: { restaurant_id: row.id }})
+      this.$router.push({ path: 'addGoods', query: { restaurant_id: row.id } })
     },
     async handleDelete (index, row) {
       try {
@@ -241,7 +240,7 @@ export default {
         } else {
           throw new Error(res.message)
         }
-      } catch(err) {
+      } catch (err) {
         this.$message({
           type: 'error',
           message: err.message
@@ -265,8 +264,8 @@ export default {
         }
       }
     },
-    addressSelect (value){
-      const {address, latitude, longitude} = value
+    addressSelect (value) {
+      const { address, latitude, longitude } = value
       this.address = { address, latitude, longitude }
     },
     handleServiceAvatarScucess (res, file) {
@@ -289,23 +288,23 @@ export default {
       return isRightType && isLimit2M
     },
     async updateShop () {
-        this.dialogFormVisible = false
-        try {
-          Object.assign(this.selectTable, this.address)
-          this.selectTable.category = this.selectedCategory.join('/')
-          const res = await updateResturant(this.selectTable)
-          if (res.status === 1) {
-            this.$message({
-              type: 'success',
-              message: '更新店铺信息成功'
-            })
-            this.getResturants()
-          } else { 
-            this.$message({
-              type: 'error',
-              message: res.message
-            })
-          }
+      this.dialogFormVisible = false
+      try {
+        Object.assign(this.selectTable, this.address)
+        this.selectTable.category = this.selectedCategory.join('/')
+        const res = await updateResturant(this.selectTable)
+        if (res.status === 1) {
+          this.$message({
+            type: 'success',
+            message: '更新店铺信息成功'
+          })
+          this.getResturants()
+        } else {
+          this.$message({
+            type: 'error',
+            message: res.message
+          })
+        }
       } catch (err) {
         console.log('更新餐馆信息失败', err)
       }
@@ -315,48 +314,48 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
-  .table-container {
-      padding: 20px;
-  }
-  .pagination {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 8px;
-  }
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    text-align: center;
-  }
-  .avatar {
-    width: 120px;
-    height: 120px;
-    display: block;
-  }
+@import "../style/mixin";
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
+.table-container {
+  padding: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #20a0ff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
 </style>

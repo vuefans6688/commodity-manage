@@ -1,17 +1,18 @@
 <template>
-  <div class="fillcontain">
+  <div class="fill-contain">
     <head-top></head-top>
     <div class="table-container">
       <el-table
         :data="tableData"
-        @expand='expand'
-        :expand-row-keys='expendRow'
-        :row-key="row => row.index"
-        style="width: 100%">
+        @expand="expand"
+        :expand-row-keys="expendRow"
+        :row-key="(row) => row.index"
+        style="width: 100%"
+      >
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="用户名" >
+              <el-form-item label="用户名">
                 <span>{{ props.row.user_name }}</span>
               </el-form-item>
               <el-form-item label="店铺名称">
@@ -29,27 +30,19 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column
-          label="订单 ID"
-          prop="id">
-        </el-table-column>
-        <el-table-column
-          label="总价格"
-          prop="total_amount">
-        </el-table-column>
-        <el-table-column
-          label="订单状态"
-          prop="status">
-        </el-table-column>
+        <el-table-column label="订单 ID" prop="id"> </el-table-column>
+        <el-table-column label="总价格" prop="total_amount"> </el-table-column>
+        <el-table-column label="订单状态" prop="status"> </el-table-column>
       </el-table>
-      <div class="Pagination" style="text-align: left;margin-top: 10px;">
+      <div class="Pagination" style="text-align: left; margin-top: 10px">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-size="20"
           layout="total, prev, pager, next"
-          :total="count">
+          :total="count"
+        >
         </el-pagination>
       </div>
     </div>
@@ -89,7 +82,7 @@ export default {
           throw new Error('获取数据失败')
         }
         this.getOrders()
-      } catch(err) {
+      } catch (err) {
         console.log('获取数据失败', err)
       }
     },
@@ -122,10 +115,10 @@ export default {
         const userInfo = await getUserInfo(row.user_id)
         const addressInfo = await getAddressById(row.address_id)
         const restaurantInfo = {
-          restaurant_name: restaurant.name, 
+          restaurant_name: restaurant.name,
           restaurant_address: restaurant.address,
-          address: addressInfo.address, 
-          user_name: userInfo.username 
+          address: addressInfo.address,
+          user_name: userInfo.username
         }
         this.tableData.splice(row.index, 1, { ...row, ...restaurantInfo })
         this.$nextTick(() => {
@@ -141,20 +134,20 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-  .table-container {
-    padding: 20px;
-  }
-  .demo-table-expand {
-	  font-size: 0;
-	}
-	.demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-	}
-	.demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-	}
+@import "../style/mixin";
+.table-container {
+  padding: 20px;
+}
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 </style>

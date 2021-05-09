@@ -2,80 +2,80 @@
  * 存储localStorage
  */
 export const setStore = (name, content) => {
-	if (!name) return
-	if (typeof content !== 'string') {
-		content = JSON.stringify(content)
-	}
-	window.localStorage.setItem(name, content)
+  if (!name) return
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content)
+  }
+  window.localStorage.setItem(name, content)
 }
 
 /**
  * 获取localStorage
  */
 export const getStore = name => {
-	if (!name) return
-	return window.localStorage.getItem(name)
+  if (!name) return
+  return window.localStorage.getItem(name)
 }
 
 /**
  * 删除localStorage
  */
 export const removeStore = name => {
-	if (!name) return
-	window.localStorage.removeItem(name)
+  if (!name) return
+  window.localStorage.removeItem(name)
 }
 
 /**
  * 获取style样式
  */
 export const getStyle = (element, attr, NumberMode = 'int') => {
-    let target
-    // scrollTop 获取方式不同，没有它不属于style，而且只有document.body才能用
-    if (attr === 'scrollTop') { 
-      target = element.scrollTop
-    } else if (element.currentStyle){
-      target = element.currentStyle[attr]
-    } else { 
-      target = document.defaultView.getComputedStyle(element,null)[attr]
-    }
-    // 在获取 opactiy 时需要获取小数 parseFloat
-    return NumberMode === 'float'? parseFloat(target) : parseInt(target)
-} 
+  let target
+  // scrollTop 获取方式不同，没有它不属于style，而且只有document.body才能用
+  if (attr === 'scrollTop') {
+    target = element.scrollTop
+  } else if (element.currentStyle) {
+    target = element.currentStyle[attr]
+  } else {
+    target = document.defaultView.getComputedStyle(element, null)[attr]
+  }
+  // 在获取 opactiy 时需要获取小数 parseFloat
+  return NumberMode === 'float' ? parseFloat(target) : parseInt(target)
+}
 
 /**
  * 页面到达底部，加载更多
  */
 export const loadMore = (element, callback) => {
-	let windowHeight = window.screen.height
-	let height
-	let setTop
-	let paddingBottom
-	let marginBottom
-    let requestFram
-    let oldScrollTop
+  let windowHeight = window.screen.height
+  let height
+  let setTop
+  let paddingBottom
+  let marginBottom
+  let requestFram
+  let oldScrollTop
 
-    document.body.addEventListener('scroll', () => {
-      loadMore()
-    }, false)
-    // 运动开始时获取元素 高度 和 offseTop, pading, margin
-	element.addEventListener('touchstart', () => {
+  document.body.addEventListener('scroll', () => {
+    loadMore()
+  }, false)
+  // 运动开始时获取元素 高度 和 offseTop, pading, margin
+  element.addEventListener('touchstart', () => {
     height = element.offsetHeight
     setTop = element.offsetTop
-    paddingBottom = getStyle(element,'paddingBottom')
-    marginBottom = getStyle(element,'marginBottom')
-  },{ passive: true })
+    paddingBottom = getStyle(element, 'paddingBottom')
+    marginBottom = getStyle(element, 'marginBottom')
+  }, { passive: true })
 
   // 运动过程中保持监听 scrollTop 的值判断是否到达底部
   element.addEventListener('touchmove', () => {
     loadMore()
-  },{ passive: true })
+  }, { passive: true })
 
   // 运动结束时判断是否有惯性运动，惯性运动结束判断是非到达底部
   element.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop
     moveEnd()
-  },{ passive: true })
-    
+  }, { passive: true })
+
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
       if (document.body.scrollTop !== oldScrollTop) {
@@ -110,17 +110,17 @@ export const showBack = callback => {
   }, false)
   document.addEventListener('touchstart', () => {
     showBackFun()
-  },{ passive: true })
+  }, { passive: true })
 
   document.addEventListener('touchmove', () => {
     showBackFun()
-  },{ passive: true })
+  }, { passive: true })
 
   document.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop
     moveEnd()
-  },{ passive: true })
-  
+  }, { passive: true })
+
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
       if (document.body.scrollTop != oldScrollTop) {
@@ -159,7 +159,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   if (duration instanceof Function) {
     callback = duration
     duration = 400
-  } else if (duration instanceof String){
+  } else if (duration instanceof String) {
     mode = duration
     duration = 400
   }
@@ -172,7 +172,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
 
   //获取dom样式
   const attrStyle = attr => {
-    if (attr === "opacity") { 
+    if (attr === "opacity") {
       return Math.round(getStyle(element, attr, 'float') * 100)
     } else {
       return getStyle(element, attr)
@@ -197,7 +197,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   //去掉传入的后缀单位
   Object.keys(target).forEach(attr => {
     if (unit[attr] == 'rem') {
-      target[attr] = Math.ceil(parseInt(target[attr])*rootSize)
+      target[attr] = Math.ceil(parseInt(target[attr]) * rootSize)
     } else {
       target[attr] = parseInt(target[attr])
     }
@@ -214,7 +214,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
       let speedBase = 0  // 目标点需要减去的基础值，三种运动状态的值都不同
       let intervalTime  // 将目标值分为多少步执行，数值越大，步长越小，运动时间越长
       switch (mode) {
-        case 'ease-out': 
+        case 'ease-out':
           speedBase = iCurrent
           intervalTime = duration * 5 / 400
           break
@@ -229,16 +229,16 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
           break
         default:
           speedBase = iCurrent
-          intervalTime = duration * 5 / 400 
+          intervalTime = duration * 5 / 400
       }
       if (mode !== 'ease-in') {
         iSpeed = (target[attr] - speedBase) / intervalTime
         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed)
       }
       //判断是否达步长之内的误差距离，如果到达说明到达目标点
-      switch(mode){
-        case 'ease-out': 
-          status = iCurrent !== target[attr] 
+      switch (mode) {
+        case 'ease-out':
+          status = iCurrent !== target[attr]
           break
         case 'linear':
           status = Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed)
@@ -247,11 +247,11 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
           status = Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed)
           break
         default:
-          status = iCurrent !== target[attr] 
+          status = iCurrent !== target[attr]
       }
 
       if (status) {
-        flag = false 
+        flag = false
         //opacity 和 scrollTop 需要特殊处理
         if (attr === "opacity") {
           element.style.filter = "alpha(opacity:" + (iCurrent + iSpeed) + ")"

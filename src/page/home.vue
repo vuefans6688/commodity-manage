@@ -1,28 +1,60 @@
 <template>
   <div class="home">
     <head-top></head-top>
-		<section class="data-section">
-			<header class="section-title">数据统计</header>
-			<el-row :gutter="20" style="margin-bottom: 10px;">
-        <el-col :span="4"><div class="data-list today-head"><span class="data-num head">当日数据：</span></div></el-col>
-				<el-col :span="4"><div class="data-list"><span class="data-num">{{ userCount }}</span> 新增用户</div></el-col>
-				<el-col :span="4"><div class="data-list"><span class="data-num">{{ orderCount }}</span> 新增订单</div></el-col>
-        <el-col :span="4"><div class="data-list"><span class="data-num">{{ adminCount }}</span> 新增管理员</div></el-col>
-			</el-row>
-      <el-row :gutter="20">
-        <el-col :span="4"><div class="data-list all-head"><span class="data-num head">总数据：</span></div></el-col>
-        <el-col :span="4"><div class="data-list"><span class="data-num">{{ allUserCount }}</span> 注册用户</div></el-col>
-        <el-col :span="4"><div class="data-list"><span class="data-num">{{ allOrderCount }}</span> 订单</div></el-col>
-        <el-col :span="4"><div class="data-list"><span class="data-num">{{ allAdminCount }}</span> 管理员</div></el-col>
+    <section class="data-section">
+      <header class="section-title">数据统计</header>
+      <el-row :gutter="20" style="margin-bottom: 10px">
+        <el-col :span="4"
+          ><div class="data-list today-head">
+            <span class="data-num head">当日数据：</span>
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ userCount }}</span> 新增用户
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ orderCount }}</span> 新增订单
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ adminCount }}</span> 新增管理员
+          </div></el-col
+        >
       </el-row>
-		</section>
-		<tendency :seven-date="sevenDate" :seven-day="sevenDay"></tendency>
+      <el-row :gutter="20">
+        <el-col :span="4"
+          ><div class="data-list all-head">
+            <span class="data-num head">总数据：</span>
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ allUserCount }}</span> 注册用户
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ allOrderCount }}</span> 订单
+          </div></el-col
+        >
+        <el-col :span="4"
+          ><div class="data-list">
+            <span class="data-num">{{ allAdminCount }}</span> 管理员
+          </div></el-col
+        >
+      </el-row>
+    </section>
+    <tendency :seven-date="sevenDate" :seven-day="sevenDay"></tendency>
   </div>
 </template>
 
 <script>
 import headTop from '../components/headTop'
-import tendency from '../components/tendency' 
+import tendency from '../components/tendency'
 import dtime from 'time-formater'
 import { userCount, orderCount, getUserCount, getOrderCount, adminDayCount, adminCount } from '@/api/getData'
 export default {
@@ -54,16 +86,16 @@ export default {
     async initData () {
       const today = dtime().format('YYYY-MM-DD')
       Promise.all([userCount(today), orderCount(today), adminDayCount(today), getUserCount(), getOrderCount(), adminCount()])
-      .then(res => {
-        this.userCount = res[0].count
-        this.orderCount = res[1].count
-        this.adminCount = res[2].count
-        this.allUserCount = res[3].count
-        this.allOrderCount = res[4].count
-        this.allAdminCount = res[5].count
-      }).catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          this.userCount = res[0].count
+          this.orderCount = res[1].count
+          this.adminCount = res[2].count
+          this.allUserCount = res[3].count
+          this.allOrderCount = res[4].count
+          this.allAdminCount = res[5].count
+        }).catch(err => {
+          console.log(err)
+        })
     },
     async getSevenData () {
       const apiArr = [[], [], []]
@@ -90,41 +122,41 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-	.data-section {
-		padding: 20px;
-		margin-bottom: 40px;
-		.section-title {
-			text-align: center;
-			font-size: 30px;
-			margin-bottom: 10px;
-		}
-		.data-list {
-			text-align: center;
-			font-size: 14px;
-			color: #666;
-      border-radius: 6px;
-      background: #E5E9F2;
-      .data-num {
-        color: #333;
-        font-size: 26px;
-      }
-      .head {
-        border-radius: 6px;
-        font-size: 22px;
-        padding: 4px 0;
-        color: #fff;
-        display: inline-block;
-      }
-    }
-    .today-head {
-      background: #FF9800;
-    }
-    .all-head {
-      background: #20A0FF;
-    }
-	}
-  .wan {
-    .sc(16px, #333)
+@import "../style/mixin";
+.data-section {
+  padding: 20px;
+  margin-bottom: 40px;
+  .section-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
   }
+  .data-list {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    border-radius: 6px;
+    background: #e5e9f2;
+    .data-num {
+      color: #333;
+      font-size: 26px;
+    }
+    .head {
+      border-radius: 6px;
+      font-size: 22px;
+      padding: 4px 0;
+      color: #fff;
+      display: inline-block;
+    }
+  }
+  .today-head {
+    background: #ff9800;
+  }
+  .all-head {
+    background: #20a0ff;
+  }
+}
+.wan {
+  .sc(16px, #333);
+}
 </style>

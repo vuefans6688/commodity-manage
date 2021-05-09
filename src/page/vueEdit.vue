@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="editor">
     <head-top></head-top>
     <div class="edit-container">
-      <quill-editor v-model="content"
-        ref="myQuillEditor"
+      <quill-editor
+        v-model="content"
+        ref="my-quill-editor"
         class="editer"
         :options="editorOption"
-        @ready="onEditorReady($event)">
+        @ready="onEditorReady($event)"
+      >
       </quill-editor>
     </div>
     <div class="submit-button">
@@ -31,12 +33,12 @@ export default {
   },
   computed: {
     editor () {
-      return this.$refs.myQuillEditor.quill
+      return this.$refs['my-quill-editor'].quill
     }
   },
   methods: {
     onEditorReady (editor) {
-      console.log('editor ready!', editor)
+      console.log('编辑就绪!', editor)
     },
     submit () {
       this.$message.success('提交成功！')
@@ -46,15 +48,15 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-	.edit-container {
-		padding: 40px;
-		margin-bottom: 40px;
-	}
-	.editer {
-		height: 350px;
-	}
-	.submit-button {
-		text-align: center;
-	}
+@import "../style/mixin";
+.edit-container {
+  padding: 40px;
+  margin-bottom: 40px;
+}
+.editer {
+  height: 350px;
+}
+.submit-button {
+  text-align: center;
+}
 </style>

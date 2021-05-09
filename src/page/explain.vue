@@ -18,11 +18,11 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-	.explain-text {
-		margin-top: 20px;
-		text-align: center;
-		font-size: 20px;
-		color: #333;
-	}
+@import "../style/mixin";
+.explain-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #333;
+}
 </style>

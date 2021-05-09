@@ -86,9 +86,9 @@ export const addShop = data => fetch('/shopping/addShop', data, 'POST')
  * 获取搜索地址
  */
 
-export const searchplace = (cityid, value) => fetch('/v1/pois', {
+export const searchplace = (cityId, value) => fetch('/v1/pois', {
 	type: 'search',
-	city_id: cityid,
+	city_id: cityId,
 	keyword: value
 })
 
@@ -96,7 +96,7 @@ export const searchplace = (cityid, value) => fetch('/v1/pois', {
  * 获取当前店铺食品种类
  */
 
-export const getCategory = restaurant_id => fetch('/shopping/getcategory/' + restaurant_id)
+export const getCategory = restaurantId => fetch('/shopping/getcategory/' + restaurantId)
 
 /**
  * 添加食品种类
@@ -128,7 +128,7 @@ export const getResturants = data => fetch('/shopping/restaurants', data)
  * 获取餐馆详细信息
  */
 
-export const getResturantDetail = restaurant_id => fetch('/shopping/restaurant/' + restaurant_id)
+export const getResturantDetail = restaurantId => fetch('/shopping/restaurant/' + restaurantId)
 
 /**
  * 获取餐馆数量
@@ -146,7 +146,7 @@ export const updateResturant = data => fetch('/shopping/updateshop', data, 'POST
  * 删除餐馆
  */
 
-export const deleteResturant = restaurant_id => fetch('/shopping/restaurant/' + restaurant_id, {}, 'DELETE')
+export const deleteResturant = restaurantId => fetch('/shopping/restaurant/' + restaurantId, {}, 'DELETE')
 
 /**
  * 获取食品列表
@@ -171,7 +171,7 @@ export const getMenu = data => fetch('/shopping/v2/menu', data)
  * 获取menu详情
  */
 
-export const getMenuById = category_id => fetch('/shopping/v2/menu/' + category_id)
+export const getMenuById = categoryId => fetch('/shopping/v2/menu/' + categoryId)
 
 /**
  * 更新食品信息
@@ -183,7 +183,7 @@ export const updateFood = data => fetch('/shopping/v2/updatefood', data, 'POST')
  * 删除食品
  */
 
-export const deleteFood = food_id => fetch('/shopping/v2/food/' + food_id, {}, 'DELETE')
+export const deleteFood = foodId => fetch('/shopping/v2/food/' + foodId, {}, 'DELETE')
 
 /**
  * 获取用户列表
@@ -213,13 +213,13 @@ export const getOrderCount = data => fetch('/bos/orders/count', data)
  * 获取用户信息
  */
 
-export const getUserInfo = user_id => fetch('/v1/user/' + user_id)
+export const getUserInfo = userId => fetch('/v1/user/' + userId)
 
 /**
  * 获取地址信息
  */
 
-export const getAddressById = address_id => fetch('/v1/addresse/' + address_id)
+export const getAddressById = addressId => fetch('/v1/addresse/' + addressId)
 
 /**
  * 获取用户分布信息

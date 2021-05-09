@@ -22,15 +22,15 @@ const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage'
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain')
 
 const routes = [
-	{
-		path: '/',
-		component: login
-	},
-	{
-		path: '/manage',
-		component: manage,
-		name: '',
-		children: [
+  {
+    path: '/',
+    component: login
+  },
+  {
+    path: '/manage',
+    component: manage,
+    name: '',
+    children: [
       {
         path: '',
         component: home,
@@ -107,10 +107,10 @@ const routes = [
         meta: ['说明', '说明']
       }
     ]
-	}
+  }
 ]
 
 export default new Router({
-	routes,
-	strict: process.env.NODE_ENV !== 'production'
+  routes,
+  strict: process.env.NODE_ENV !== 'production'
 })

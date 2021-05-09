@@ -1,6 +1,6 @@
 <template>
-  <div class="visitorpie">
-    <div id="visitorpie" style="width: 90%;height: 450px;"></div>
+  <div class="visitor-pie">
+    <div id="visitor-pie" style="width: 90%; height: 450px"></div>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
         title: {
           text: '用户分布',
           subtext: '',
-          x:'center'
+          x: 'center'
         },
         tooltip: {
           trigger: 'item',
@@ -31,13 +31,13 @@ export default {
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['北京','上海','深圳','杭州','其他']
+          data: ['北京', '上海', '深圳', '杭州', '其他']
         },
         series: [
           {
             name: '访问来源',
             type: 'pie',
-            radius : '55%',
+            radius: '55%',
             center: ['50%', '60%'],
             data: [
               { value: this.pieData.beijing, name: '北京' },
@@ -68,10 +68,10 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-  .visitorpie {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
+@import "../style/mixin";
+.visitor-pie {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 </style>

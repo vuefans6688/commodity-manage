@@ -1,9 +1,15 @@
 <template>
   <div class="add-shop">
     <head-top></head-top>
-    <el-row style="margin-top: 20px;">
+    <el-row style="margin-top: 20px">
       <el-col :span="12" :offset="4">
-        <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData">
+        <el-form
+          :model="formData"
+          :rules="rules"
+          ref="formData"
+          label-width="110px"
+          class="demo-formData"
+        >
           <el-form-item label="店铺名称" prop="name">
             <el-input v-model="formData.name"></el-input>
           </el-form-item>
@@ -12,7 +18,7 @@
               v-model="formData.address"
               :fetch-suggestions="querySearchAsync"
               placeholder="请输入地址"
-              style="width: 100%;"
+              style="width: 100%"
               @select="addressSelect"
             ></el-autocomplete>
             <span>当前城市: {{ city.name }}</span>
@@ -33,47 +39,81 @@
               change-on-select
             ></el-cascader>
           </el-form-item>
-          <el-form-item label="店铺特点" style="white-space: nowrap;">
+          <el-form-item label="店铺特点" style="white-space: nowrap">
             <span>品牌保证</span>
-            <el-switch on-text="" off-text="" v-model="formData.is_premium"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.is_premium"
+            ></el-switch>
             <span>蜂鸟专送</span>
-            <el-switch on-text="" off-text="" v-model="formData.delivery_mode"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.delivery_mode"
+            ></el-switch>
             <span>新开店铺</span>
-            <el-switch on-text="" off-text="" v-model="formData.new"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.new"
+            ></el-switch>
           </el-form-item>
-          <el-form-item style="white-space: nowrap;">
+          <el-form-item style="white-space: nowrap">
             <span>外卖保</span>
-            <el-switch on-text="" off-text="" v-model="formData.bao"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.bao"
+            ></el-switch>
             <span>准时达</span>
-            <el-switch on-text="" off-text="" v-model="formData.zhun"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.zhun"
+            ></el-switch>
             <span>开发票</span>
-            <el-switch on-text="" off-text="" v-model="formData.piao"></el-switch>
+            <el-switch
+              on-text=""
+              off-text=""
+              v-model="formData.piao"
+            ></el-switch>
           </el-form-item>
           <el-form-item label="配送费" prop="float_delivery_fee">
-            <el-input-number v-model="formData.float_delivery_fee" :min="0" :max="20"></el-input-number>
+            <el-input-number
+              v-model="formData.float_delivery_fee"
+              :min="0"
+              :max="20"
+            ></el-input-number>
           </el-form-item>
           <el-form-item label="起送价" prop="float_minimum_order_amount">
-            <el-input-number v-model="formData.float_minimum_order_amount" :min="0" :max="100"></el-input-number>
+            <el-input-number
+              v-model="formData.float_minimum_order_amount"
+              :min="0"
+              :max="100"
+            ></el-input-number>
           </el-form-item>
-          <el-form-item label="营业时间" style="white-space: nowrap;">
+          <el-form-item label="营业时间" style="white-space: nowrap">
             <el-time-select
               placeholder="起始时间"
               v-model="formData.startTime"
               :picker-options="{
-              start: '05:30',
-              step: '00:15',
-              end: '23:30'
-              }">
+                start: '05:30',
+                step: '00:15',
+                end: '23:30',
+              }"
+            >
             </el-time-select>
             <el-time-select
               placeholder="结束时间"
               v-model="formData.endTime"
               :picker-options="{
-              start: '05:30',
-              step: '00:15',
-              end: '23:30',
-              minTime: formData.startTime
-              }">
+                start: '05:30',
+                step: '00:15',
+                end: '23:30',
+                minTime: formData.startTime,
+              }"
+            >
             </el-time-select>
           </el-form-item>
           <el-form-item label="上传店铺头像">
@@ -82,8 +122,13 @@
               :action="baseUrl + '/v1/addimg/shop'"
               :show-file-list="false"
               :on-success="handleShopAvatarScucess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="formData.image_path" :src="baseImgPath + formData.image_path" class="avatar">
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                v-if="formData.image_path"
+                :src="baseImgPath + formData.image_path"
+                class="avatar"
+              />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -93,8 +138,13 @@
               :action="baseUrl + '/v1/addimg/shop'"
               :show-file-list="false"
               :on-success="handleBusinessAvatarScucess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="formData.business_license_image" :src="baseImgPath + formData.business_license_image" class="avatar">
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                v-if="formData.business_license_image"
+                :src="baseImgPath + formData.business_license_image"
+                class="avatar"
+              />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -104,55 +154,68 @@
               :action="baseUrl + '/v1/addimg/shop'"
               :show-file-list="false"
               :on-success="handleServiceAvatarScucess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="formData.catering_service_license_image" :src="baseImgPath + formData.catering_service_license_image" class="avatar">
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                v-if="formData.catering_service_license_image"
+                :src="baseImgPath + formData.catering_service_license_image"
+                class="avatar"
+              />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
           <el-form-item label="优惠活动">
-            <el-select v-model="activityValue" @change="selectActivity" :placeholder="activityValue">
+            <el-select
+              v-model="activityValue"
+              @change="selectActivity"
+              :placeholder="activityValue"
+            >
               <el-option
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
+                :value="item.value"
+              >
               </el-option>
             </el-select>
           </el-form-item>
           <el-table
             :data="activities"
-            style="min-width: 600px;margin-bottom: 20px;"
-            align="cneter" :row-class-name="tableRowClassName">
+            style="min-width: 600px; margin-bottom: 20px"
+            align="cneter"
+            :row-class-name="tableRowClassName"
+          >
             <el-table-column
               prop="icon_name"
               label="活动标题"
               align="cneter"
-              width="120">
+              width="120"
+            >
             </el-table-column>
             <el-table-column
               prop="name"
               label="活动名称"
               align="cneter"
-              width="120">
+              width="120"
+            >
             </el-table-column>
-            <el-table-column
-              prop="description"
-              align="cneter"
-              label="活动详情">
+            <el-table-column prop="description" align="cneter" label="活动详情">
             </el-table-column>
-            <el-table-column
-              label="操作"
-              width="120">
-            <template slot-scope="scope">
+            <el-table-column label="操作" width="120">
+              <template slot-scope="scope">
                 <el-button
                   size="small"
                   type="danger"
-                  @click="handleDelete(scope.$index)">删除</el-button>
-            </template>
+                  @click="handleDelete(scope.$index)"
+                  >删除</el-button
+                >
+              </template>
             </el-table-column>
           </el-table>
           <el-form-item class="button-submit">
-            <el-button type="primary" @click="submitForm('formData')">立即创建</el-button>
+            <el-button type="primary" @click="submitForm('formData')"
+              >立即创建</el-button
+            >
           </el-form-item>
         </el-form>
       </el-col>
@@ -192,7 +255,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: '请输入店铺名称', trigger: 'blur' },
+          { required: true, message: '请输入店铺名称', trigger: 'blur' }
         ],
         address: [
           { required: true, message: '请输入详细地址', trigger: 'blur' }
@@ -200,21 +263,21 @@ export default {
         phone: [
           { required: true, message: '请输入联系电话' },
           { type: 'number', message: '电话号码必须是数字' }
-        ],
+        ]
       },
       options: [
         {
           value: '满减优惠',
           label: '满减优惠'
-        }, 
+        },
         {
           value: '优惠大酬宾',
           label: '优惠大酬宾'
-        }, 
+        },
         {
           value: '新用户立减',
           label: '新用户立减'
-        }, 
+        },
         {
           value: '进店领券',
           label: '进店领券'
@@ -279,7 +342,7 @@ export default {
             })
             callback(cityList)
           }
-        } catch(err) {
+        } catch (err) {
           console.log(err)
         }
       }
@@ -309,7 +372,7 @@ export default {
         this.$message.error('上传图片失败！')
       }
     },
-    beforeAvatarUpload(file) {
+    beforeAvatarUpload (file) {
       const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png')
       const isLimit2M = file.size / 1024 / 1024 < 2
       if (!isRightType) {
@@ -432,7 +495,7 @@ export default {
               })
             }
             console.log(result)
-          } catch(err) {
+          } catch (err) {
             console.log(err)
           }
         } else {
@@ -450,37 +513,37 @@ export default {
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-	.button-submit {
-		text-align: center;
-	}
-	.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-	}
-	.avatar-uploader .el-upload:hover {
-	  border-color: #20a0ff;
-	}
-	.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    text-align: center;
-	}
-	.avatar {
-    width: 120px;
-    height: 120px;
-    display: block;
-	}
-	.el-table .info-row {
-	  background: #c9e5f5;
-	}
-	.el-table .positive-row {
-	  background: #e2f0e4;
-	}
+@import "../style/mixin";
+.button-submit {
+  text-align: center;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #20a0ff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
+.el-table .info-row {
+  background: #c9e5f5;
+}
+.el-table .positive-row {
+  background: #e2f0e4;
+}
 </style>
