@@ -3,19 +3,16 @@ import { baseUrl } from './env'
 export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
   type = type.toUpperCase()
   url = baseUrl + url
-
   if (type === 'GET') {
-    let dataStr = ''; //数据拼接字符串
+    let dataStr = '' // 数据拼接字符串
     Object.keys(data).forEach(key => {
       dataStr += key + '=' + data[key] + '&'
     })
-
     if (dataStr !== '') {
       dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'))
       url = url + '?' + dataStr
     }
   }
-
   if (window.fetch && method === 'fetch') {
     let requestConfig = {
       credentials: 'include',
@@ -27,13 +24,11 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
       mode: "cors",
       cache: "force-cache"
     }
-
     if (type === 'POST') {
       Object.defineProperty(requestConfig, 'body', {
         value: JSON.stringify(data)
       })
     }
-
     try {
       const response = await fetch(url, requestConfig)
       const responseJson = await response.json()
@@ -43,32 +38,30 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
     }
   } else {
     return new Promise((resolve, reject) => {
-      let requestObj
+      let requestObject
       if (window.XMLHttpRequest) {
-        requestObj = new XMLHttpRequest()
+        requestObject = new XMLHttpRequest()
       } else {
-        requestObj = new ActiveXObject
+        requestObject = new ActiveXObject
       }
 
       let sendData = ''
       if (type === 'POST') {
         sendData = JSON.stringify(data)
       }
-
-      requestObj.open(type, url, true)
-      requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-      requestObj.send(sendData)
-
-      requestObj.onreadystatechange = () => {
-        if (requestObj.readyState === 4) {
-          if (requestObj.status === 200) {
-            let obj = requestObj.response
-            if (typeof obj !== 'object') {
-              obj = JSON.parse(obj)
+      requestObject.open(type, url, true)
+      requestObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      requestObject.send(sendData)
+      requestObject.onreadystatechange = () => {
+        if (requestObject.readyState === 4) {
+          if (requestObject.status === 200) {
+            let response = requestObject.response
+            if (typeof response !== 'object') {
+              response = JSON.parse(response)
             }
-            resolve(obj)
+            resolve(response)
           } else {
-            reject(requestObj)
+            reject(requestObject)
           }
         }
       }

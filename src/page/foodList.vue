@@ -7,8 +7,7 @@
         @expand="expand"
         :expand-row-keys="expendRow"
         :row-key="(row) => row.index"
-        style="width: 100%"
-      >
+        style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -47,15 +46,8 @@
         <el-table-column label="评分" prop="rating"> </el-table-column>
         <el-table-column label="操作" width="160">
           <template slot-scope="scope">
-            <el-button size="small" @click="handleEdit(scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              size="small"
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button
-            >
+            <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button size="small" @click="handleDelete(scope.$index, scope.row)" type="danger">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -66,8 +58,7 @@
           :current-page="currentPage"
           :page-size="20"
           layout="total, prev, pager, next"
-          :total="count"
-        >
+          :total="count">
         </el-pagination>
       </div>
       <el-dialog title="修改食品信息" v-model="dialogFormVisible">

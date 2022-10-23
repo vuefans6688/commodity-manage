@@ -1,11 +1,13 @@
 <template>
-  <div id="app" class="fillcontain">
-    <router-view></router-view>
+  <div id="app" class="fill-contain">
+    <router-view />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'App'
+}
 </script>
 
 <style lang="less">

@@ -315,13 +315,13 @@ export default {
               label: item.name,
               children: []
             }
-            item.sub_categories.forEach((subitem, index) => {
+            item.sub_categories.forEach((subItem, index) => {
               if (index === 0) {
                 return
               }
               addNew.children.push({
-                value: subitem.name,
-                label: subitem.name
+                value: subItem.name,
+                label: subItem.name
               })
             })
             this.categoryOptions.push(addNew)
@@ -460,7 +460,7 @@ export default {
               });
               this.formData = {
                 name: '',  // 店铺名称
-                address: '', //地址
+                address: '', // 地址
                 latitude: '',
                 longitude: '',
                 description: '',  // 介绍

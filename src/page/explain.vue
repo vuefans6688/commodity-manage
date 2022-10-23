@@ -1,5 +1,5 @@
 <template>
-  <div class="fillcontain">
+  <div class="fill-contain">
     <head-top></head-top>
     <p class="explain-text">node-elm后台管理系统</p>
     <p class="explain-text">第一次登录的用户自动注册成为普通管理员</p>
