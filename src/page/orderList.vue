@@ -10,22 +10,22 @@
         style="width: 100%"
       >
         <el-table-column type="expand">
-          <template slot-scope="props">
+          <template slot-scope="{ row }">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="用户名">
-                <span>{{ props.row.user_name }}</span>
+                <span>{{ row.user_name }}</span>
               </el-form-item>
               <el-form-item label="店铺名称">
-                <span>{{ props.row.restaurant_name }}</span>
+                <span>{{ row.restaurant_name }}</span>
               </el-form-item>
               <el-form-item label="收货地址">
-                <span>{{ props.row.address }}</span>
+                <span>{{ row.address }}</span>
               </el-form-item>
               <el-form-item label="店铺 ID">
-                <span>{{ props.row.restaurant_id }}</span>
+                <span>{{ row.restaurant_id }}</span>
               </el-form-item>
               <el-form-item label="店铺地址">
-                <span>{{ props.row.restaurant_address }}</span>
+                <span>{{ row.restaurant_address }}</span>
               </el-form-item>
             </el-form>
           </template>

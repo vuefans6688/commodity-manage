@@ -9,34 +9,34 @@
         :row-key="(row) => row.index"
         style="width: 100%">
         <el-table-column type="expand">
-          <template slot-scope="props">
+          <template slot-scope="{ row }">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="食品名称">
-                <span>{{ props.row.name }}</span>
+                <span>{{ row.name }}</span>
               </el-form-item>
               <el-form-item label="餐馆名称">
-                <span>{{ props.row.restaurant_name }}</span>
+                <span>{{ row.restaurant_name }}</span>
               </el-form-item>
               <el-form-item label="食品 ID">
-                <span>{{ props.row.item_id }}</span>
+                <span>{{ row.item_id }}</span>
               </el-form-item>
               <el-form-item label="餐馆 ID">
-                <span>{{ props.row.restaurant_id }}</span>
+                <span>{{ row.restaurant_id }}</span>
               </el-form-item>
               <el-form-item label="食品介绍">
-                <span>{{ props.row.description }}</span>
+                <span>{{ row.description }}</span>
               </el-form-item>
               <el-form-item label="餐馆地址">
-                <span>{{ props.row.restaurant_address }}</span>
+                <span>{{ row.restaurant_address }}</span>
               </el-form-item>
               <el-form-item label="食品评分">
-                <span>{{ props.row.rating }}</span>
+                <span>{{ row.rating }}</span>
               </el-form-item>
               <el-form-item label="食品分类">
-                <span>{{ props.row.category_name }}</span>
+                <span>{{ row.category_name }}</span>
               </el-form-item>
               <el-form-item label="月销量">
-                <span>{{ props.row.month_sales }}</span>
+                <span>{{ row.month_sales }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -45,9 +45,9 @@
         <el-table-column label="食品介绍" prop="description"> </el-table-column>
         <el-table-column label="评分" prop="rating"> </el-table-column>
         <el-table-column label="操作" width="160">
-          <template slot-scope="scope">
-            <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button size="small" @click="handleDelete(scope.$index, scope.row)" type="danger">删除</el-button>
+          <template slot-scope="{ row, $index }">
+            <el-button size="small" @click="handleEdit(row)">编辑</el-button>
+            <el-button size="small" @click="handleDelete($index, row)" type="danger">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -112,11 +112,11 @@
             </el-table-column>
             <el-table-column prop="price" label="价格"> </el-table-column>
             <el-table-column label="操作">
-              <template slot-scope="scope">
+              <template slot-scope="{ $index }">
                 <el-button
                   size="small"
                   type="danger"
-                  @click="deleteSpecs(scope.$index)"
+                  @click="deleteSpecs($index)"
                   >删除</el-button
                 >
               </template>

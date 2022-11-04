@@ -100,7 +100,7 @@
               :picker-options="{
                 start: '05:30',
                 step: '00:15',
-                end: '23:30',
+                end: '23:30'
               }"
             >
             </el-time-select>
@@ -111,7 +111,7 @@
                 start: '05:30',
                 step: '00:15',
                 end: '23:30',
-                minTime: formData.startTime,
+                minTime: formData.startTime
               }"
             >
             </el-time-select>
@@ -202,11 +202,11 @@
             <el-table-column prop="description" align="cneter" label="活动详情">
             </el-table-column>
             <el-table-column label="操作" width="120">
-              <template slot-scope="scope">
+              <template slot-scope="{ $index }">
                 <el-button
                   size="small"
                   type="danger"
-                  @click="handleDelete(scope.$index)"
+                  @click="handleDelete($index)"
                   >删除</el-button
                 >
               </template>
@@ -457,7 +457,7 @@ export default {
               this.$message({
                 type: 'success',
                 message: '添加成功'
-              });
+              })
               this.formData = {
                 name: '',  // 店铺名称
                 address: '', // 地址

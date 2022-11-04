@@ -4,31 +4,31 @@
     <div class="table-container">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
-          <template slot-scope="props">
+          <template slot-scope="{ row }">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="店铺名称">
-                <span>{{ props.row.name }}</span>
+                <span>{{ row.name }}</span>
               </el-form-item>
               <el-form-item label="店铺地址">
-                <span>{{ props.row.address }}</span>
+                <span>{{ row.address }}</span>
               </el-form-item>
               <el-form-item label="店铺介绍">
-                <span>{{ props.row.description }}</span>
+                <span>{{ row.description }}</span>
               </el-form-item>
               <el-form-item label="店铺 ID">
-                <span>{{ props.row.id }}</span>
+                <span>{{ row.id }}</span>
               </el-form-item>
               <el-form-item label="联系电话">
-                <span>{{ props.row.phone }}</span>
+                <span>{{ row.phone }}</span>
               </el-form-item>
               <el-form-item label="评分">
-                <span>{{ props.row.rating }}</span>
+                <span>{{ row.rating }}</span>
               </el-form-item>
               <el-form-item label="销售量">
-                <span>{{ props.row.recent_order_num }}</span>
+                <span>{{ row.recent_order_num }}</span>
               </el-form-item>
               <el-form-item label="分类">
-                <span>{{ props.row.category }}</span>
+                <span>{{ row.category }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -37,20 +37,20 @@
         <el-table-column label="店铺地址" prop="address"> </el-table-column>
         <el-table-column label="店铺介绍" prop="description"> </el-table-column>
         <el-table-column label="操作" width="200">
-          <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+          <template slot-scope="{ row, $index }">
+            <el-button size="mini" @click="handleEdit($index, row)"
               >编辑</el-button
             >
             <el-button
               size="mini"
               type="Success"
-              @click="addFood(scope.$index, scope.row)"
+              @click="addFood($index, row)"
               >添加食品</el-button
             >
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
+              @click="handleDelete($index, row)"
               >删除</el-button
             >
           </template>
@@ -80,7 +80,7 @@
               style="width: 100%"
               @select="addressSelect"
             ></el-autocomplete>
-            <span>当前城市： {{ city.name }}</span>
+            <span>当前城市：{{ city.name }}</span>
           </el-form-item>
           <el-form-item label="店铺介绍" label-width="100px">
             <el-input v-model="selectTable.description"></el-input>

@@ -4,13 +4,13 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
   type = type.toUpperCase()
   url = baseUrl + url
   if (type === 'GET') {
-    let dataStr = '' // 数据拼接字符串
+    let dataString = '' // 数据拼接字符串
     Object.keys(data).forEach(key => {
-      dataStr += key + '=' + data[key] + '&'
+      dataString += key + '=' + data[key] + '&'
     })
-    if (dataStr !== '') {
-      dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'))
-      url = url + '?' + dataStr
+    if (dataString !== '') {
+      dataString = dataString.substr(0, dataString.lastIndexOf('&'))
+      url = url + '?' + dataString
     }
   }
   if (window.fetch && method === 'fetch') {
@@ -45,13 +45,13 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
         requestObject = new ActiveXObject
       }
 
-      let sendData = ''
+      let sendText = ''
       if (type === 'POST') {
-        sendData = JSON.stringify(data)
+        sendText = JSON.stringify(data)
       }
       requestObject.open(type, url, true)
       requestObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-      requestObject.send(sendData)
+      requestObject.send(sendText)
       requestObject.onreadystatechange = () => {
         if (requestObject.readyState === 4) {
           if (requestObject.status === 200) {

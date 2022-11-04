@@ -142,11 +142,11 @@
               </el-table-column>
               <el-table-column prop="price" label="价格"> </el-table-column>
               <el-table-column label="操作">
-                <template slot-scope="scope">
+                <template slot-scope="{ $index }">
                   <el-button
                     size="small"
                     type="danger"
-                    @click="handleDelete(scope.$index)"
+                    @click="handleDelete($index)"
                     >删除</el-button
                   >
                 </template>
@@ -262,7 +262,7 @@ export default {
       this.restaurant_id = Math.ceil(Math.random() * 10)
       this.$msgbox({
         title: '提示',
-        message: '添加食品需要选择一个商铺，先去就去选择商铺吗？',
+        message: '添加食品需要选择一个商铺，请先去选择商铺吧？',
         showCancelButton: true,
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -351,10 +351,10 @@ export default {
       const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png')
       const isLimit2M = file.size / 1024 / 1024 < 2
       if (!isRightType) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+        this.$message.error('上传头像图片只能是JPG格式!')
       }
       if (!isLimit2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
+        this.$message.error('上传头像图片大小不能超过2MB!')
       }
       return isRightType && isLimit2M
     },
@@ -434,8 +434,7 @@ export default {
   min-width: 400px;
   margin-bottom: 30px;
   &:hover {
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
-      0 2px 4px 0 rgba(232, 237, 250, 0.5);
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
     border-radius: 6px;
     transition: all 400ms;
   }
