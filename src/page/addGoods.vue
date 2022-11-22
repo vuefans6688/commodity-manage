@@ -292,7 +292,7 @@ export default {
       try {
         const result = await getCategory(this.restaurant_id)
         if (result.status === 1) {
-          result.category_list.map((item, index) => {
+          result.category_list.forEach((item, index) => {
             item.value = index
             item.label = item.name
           })

@@ -38,8 +38,8 @@ export default {
       if (command === 'home') {
         this.$router.push('/manage')
       } else if (command === 'signout') {
-        const res = await signout()
-        if (res.status === 1) {
+        const response = await signout()
+        if (response.status === 1) {
           this.$message({
             type: 'success',
             message: '退出成功'
@@ -48,7 +48,7 @@ export default {
         } else {
           this.$message({
             type: 'error',
-            message: res.message
+            message: response.message
           })
         }
       }

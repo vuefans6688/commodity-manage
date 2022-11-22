@@ -163,7 +163,6 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
     callback = mode
     mode = 'ease-out'
   }
-
   // 获取dom样式
   const attrStyle = attr => {
     if (attr === "opacity") {
@@ -174,10 +173,8 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   }
   // 根字体大小，需要从此将 rem 改成 px 进行运算
   const rootSize = parseFloat(document.documentElement.style.fontSize)
-
   const unit = {}
   const initState = {}
-
   // 获取目标属性单位和初始样式值
   Object.keys(target).forEach(attr => {
     if (/[^\d^\.]+/gi.test(target[attr])) {
@@ -187,7 +184,6 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
     }
     initState[attr] = attrStyle(attr)
   })
-
   // 去掉传入的后缀单位
   Object.keys(target).forEach(attr => {
     if (unit[attr] == 'rem') {
@@ -196,8 +192,6 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
       target[attr] = parseInt(target[attr])
     }
   })
-
-
   let flag = true  // 假设所有运动到达终点
   const remberSpeed = {}  // 记录上一个速度值,在ease-in模式下需要用到
   element.timer = setInterval(() => {

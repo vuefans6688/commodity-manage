@@ -21,7 +21,7 @@
               <el-form-item label="收货地址">
                 <span>{{ row.address }}</span>
               </el-form-item>
-              <el-form-item label="店铺 ID">
+              <el-form-item label="店铺ID">
                 <span>{{ row.restaurant_id }}</span>
               </el-form-item>
               <el-form-item label="店铺地址">
@@ -30,9 +30,9 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column label="订单 ID" prop="id"> </el-table-column>
-        <el-table-column label="总价格" prop="total_amount"> </el-table-column>
-        <el-table-column label="订单状态" prop="status"> </el-table-column>
+        <el-table-column label="订单ID" prop="id"></el-table-column>
+        <el-table-column label="总价格" prop="total_amount"></el-table-column>
+        <el-table-column label="订单状态" prop="status"></el-table-column>
       </el-table>
       <div class="Pagination" style="text-align: left; margin-top: 10px">
         <el-pagination
